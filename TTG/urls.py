@@ -28,6 +28,9 @@ urlpatterns = [
     
     path('contact-us/', views.contact_us_view, name='contact-us'),
 
+    path('profile/<str:username>', views.userProfileView, name='user_profile'),
+
+
     path("chat/", include("Chat.urls")),
     path('shop/', views.shopView, name="shop"),
     path('product/<int:product_id>/', views.ProductView, name="product"),

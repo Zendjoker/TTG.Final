@@ -87,6 +87,11 @@ def coursesView(request, *args, **kwargs):
 
     return render(request, 'courses.html', {"courses": courses})
 
+
+def userProfileView(request, *args, **kwargs):  
+    user = CustomUser.objects.get(user=User.objects.get(username=kwargs.get('username')))
+    return render(request, 'user_profile.html', {"user": user})
+
 def levelsView(request, *args, **kwargs):
     course_id = kwargs.get('course_id')
     course = Course.objects.get(id=course_id)
