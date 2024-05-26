@@ -223,6 +223,7 @@
                         </div>
                     </div>
                     <div class="right-profile" id="profile-dropdown">
+                       
                         <img class="profile-imgs" src="{{user.customuser.pfp.url}}" alt="">
                         <!-- <span class="username">{{user.username}}</span> -->
                         <!-- <i id="chevron-down-icon" data-lucide="chevron-down" color="white"></i> -->
@@ -238,9 +239,12 @@
                                 <img class="profile-imgs-drop" src="{{user.customuser.pfp.url}}" alt="">
 
                                 <div class="fols">
-                                    <span class="username-under">Hi , {{user.username}}</span>
-                                    <span class="Emmail-user">{{user.customuser.email}}</span>
+                                    {% comment %} <a href="{% url 'user_profile' user.username %}"> {% endcomment %}
+                                        <span class="username-under">Hi, {{ user.username }}</span>
+                                        <span class="Emmail-user">{{ user.email }}</span>
+                                    {% comment %} </a> {% endcomment %}
                                 </div>
+                                
                             </div>
 
                             <a href="{% url "cart" %}" class="settings-profile">
