@@ -372,13 +372,13 @@
     border: 1px solid #ffffff;
 }
 .buy-now{
-    background: linear-gradient(338.46deg, rgba(255, 255, 255, 0.0812) -2.72%, rgb(235 115 255 / 37%) 106.36%);
-    font-size: medium;
+    border-radius: 6px;
+    background: linear-gradient(338deg, rgba(255, 255, 255, 0.08) -2.72%, rgba(235, 115, 255, 0.25) 106.36%);    font-size: medium;
     font-weight: 500;
     border: none;
     color: white;
     padding: 5px 8px;
-    border-radius: 5px;
+    border-radius: 6px;
 }
 @media screen and (max-width: 1024px) {
     .user-profile-container{
