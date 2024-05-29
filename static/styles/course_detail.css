@@ -6,13 +6,7 @@
 	--font: "Poppins", sans-serif;
 }
 
-body {
-	margin: 0;
-	padding: 0;
-	color: var(--body-color);
-	background-color: var(--body-bg);
-	font-family: var(--font);
-}
+
 
 .p-text {
 	color: #f6faff;
@@ -345,6 +339,7 @@ body {
 .place-order {
 	font-weight: 200;
 	font-size: small;
+	color: #fff;
 }
 
 .items-container>.Title {

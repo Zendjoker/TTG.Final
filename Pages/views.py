@@ -50,10 +50,13 @@ from Users.models import CustomUser
 from django.shortcuts import render
 from django.contrib.auth import logout
 from django.shortcuts import redirect
-from Pages.models import Feedback, Podcast, FeaturedYoutubeVideo
+from Pages.models import Feedback, Podcast , FeaturedYoutubeVideo
+
+
 
 def homeView(request, *args, **kwargs):
-    courses = request.user.customuser.enrolled_courses.all()
+    user = request.user.customuser
+    courses = user.enrolled_courses.all()
     home_obj = Home.objects.all().first()
     featured_course = home_obj.featured_course if home_obj else None
     podcasts = Podcast.objects.all()
@@ -62,18 +65,42 @@ def homeView(request, *args, **kwargs):
     quests_and_progress = []
 
     for quest in quests:
-        uqp, created = UserQuestProgress.objects.get_or_create(user=request.user.customuser, quest=quest)
+        uqp, created = UserQuestProgress.objects.get_or_create(user=user, quest=quest)
         quests_and_progress.append((quest, uqp))
 
-    return render(request, 'home.html', 
-                  {
-                      "courses": courses, 
-                      "next_points_goal": next_points_goal,
-                      "feedback_options": Feedback.FEEDBACKS, 
-                      "featured_course": featured_course,
-                      "podcasts": podcasts, 
-                      "quests_and_progress": quests_and_progress
-                  })
+    is_enrolled = featured_course in courses if featured_course else False
+    other_courses = Course.objects.exclude(id__in=courses.values_list('id', flat=True))
+
+    print("Featured Course:", featured_course)
+    print("Enrolled Courses:", courses)
+    print("Other Courses:", other_courses)
+
+    context = {
+        "courses": courses,
+        "next_points_goal": next_points_goal,
+        "feedback_options": Feedback.FEEDBACKS,
+        "featured_course": featured_course,
+        "podcasts": podcasts,
+        "quests_and_progress": quests_and_progress,
+        "is_enrolled": is_enrolled,
+        "other_courses": other_courses,
+    }
+
+    return render(request, 'home.html', context)
+
+
+# Buy Course Page Views  http://127.0.0.1:8000/buy-course/TileofCourse
+def course_detail_view(request, course_title):
+    course = get_object_or_404(Course, title=course_title)
+    course_requirements = course.course_requirements.split('\n') if course.course_requirements else []
+    course_features = course.course_features.split('\n') if course.course_features else []
+
+    context = {
+        'course': course,
+        'course_requirements': course_requirements,
+        'course_features': course_features,
+    }
+    return render(request, 'course_detail.html', context)
 
 
 def shopView(request, *args, **kwargs):

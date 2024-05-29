@@ -2,77 +2,48 @@
 {% load static %}
 
 {% block head %}
-    
     <link rel="stylesheet" href="{% static "styles/user_profile.css" %}">
-
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 {% endblock head %}
+
 {% block main %}
 {% include "components/navbar.html" %}
 
-
 <div class="mains">
-   
-    <div  class="user-profile-container">
+    <div id="userProfileContainer" class="user-profile-container">
         <div class="headertop">
-          <div class="goback">
-            <a href="#" onclick="goBack()"><i data-lucide="undo-2"></i> Go Back</a>
-            <div class="icon-licks-pro">
-                <a href="#" onclick="toggleLike(this)"><i class="like-button" data-lucide="heart"></i></a>
-                <a href="#" onclick="showLinkPopup()"><i data-lucide="share"></i></a>
+            <div class="goback">
+                <a href="#" onclick="goBack()"><i data-lucide="undo-2"></i> Go Back</a>
+                <div class="icon-licks-pro">
+                    <a href="#" onclick="toggleLike(this)"><i class="like-button" data-lucide="heart"></i></a>
+                    <a href="#" onclick="showLinkPopup()"><i data-lucide="share"></i></a>
+                </div>
             </div>
-        </div>
         </div>
         <div class="main-content">
             <div class="left">
                 <div class="balance">
                     <div class="header-wrapper">
-                      <div class="balance-header">
-                        <span class="h1-text">Total Balance</span>
-                        <div class="percentage">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="7"
-                            height="8"
-                            viewBox="0 0 7 8"
-                            fill="none"
-                          >
-                            <path
-                              d="M4.14314 4.73814L3.10051 5.78078C2.71662 6.16466 2.09422 6.16466 1.71033 5.78078C1.32644 5.39689 1.32644 4.77449 1.71033 4.3906L2.75296 3.34797L0.00753784 0.602539H6.88857V7.48357L4.14314 4.73814Z"
-                              fill="#05CD99"
-                            />
-                          </svg>
-                          <span class="p-text">+12,5%</span>
+                        <div class="balance-header">
+                            <span class="h1-text">Total Balance</span>
+                            <div class="percentage">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="8" viewBox="0 0 7 8" fill="none">
+                                    <path d="M4.14314 4.73814L3.10051 5.78078C2.71662 6.16466 2.09422 6.16466 1.71033 5.78078C1.32644 5.39689 1.32644 4.77449 1.71033 4.3906L2.75296 3.34797L0.00753784 0.602539H6.88857V7.48357L4.14314 4.73814Z" fill="#05CD99"/>
+                                </svg>
+                                <span class="p-text">+12,5%</span>
+                            </div>
                         </div>
-                      </div>
-                      <img class="bar-icon" src="{% static "assets/bar-icon.png" %}" alt="bar-icon" />
+                        <img class="bar-icon" src="{% static "assets/bar-icon.png" %}" alt="bar-icon"/>
                     </div>
                     <span class="h1-text">$6872.5</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="424"
-                      height="122"
-                      viewBox="0 0 424 122"
-                      fill="none"
-                    >
-                      <path
-                        d="M0.427983 118.792L20.436 112.705C24.5802 111.445 28.3524 109.192 31.426 106.142L40.1668 97.4693C47.8383 89.8574 60.6085 91.3656 66.3267 100.559V100.559C68.5796 104.181 72.1207 106.816 76.2356 107.933L80.7358 109.155C84.3291 110.13 88.1567 108.913 90.521 106.044L94.2298 101.542C99.2401 95.4608 108.777 96.2108 112.8 103.002V103.002C117.49 110.921 129.14 110.308 132.942 101.943L136.044 95.1183L146.061 69.7866L151.069 57.1207L153.574 50.7878V50.7878C154.669 48.018 158.379 47.5263 160.167 49.9138L170.951 64.3089C171.867 65.5318 172.978 66.5953 174.24 67.4566L177.674 69.8001C180.052 71.4226 182.198 73.3601 184.055 75.5595L188.534 80.8632C190.275 82.9246 192.662 84.3362 195.305 84.8674L196.035 85.0139C198.981 85.606 202.037 84.8823 204.4 83.0326V83.0326C206.083 81.7156 207.313 79.9064 207.92 77.8563L217.017 47.0993L222.031 30.1449L225.46 20.0467V20.0467C227.102 13.6833 235.487 12.2476 239.174 17.6988L255.167 41.3498C257.353 44.582 260.457 47.0861 264.078 48.5381V48.5381C267.645 49.9687 271.553 50.3139 275.312 49.5302L287.27 47.0369C289.641 46.5425 291.973 45.8759 294.247 45.0424L298.303 43.5554C309.407 39.485 321.745 40.4784 332.073 46.2744V46.2744L346.633 55.107C353.396 59.2095 361.952 58.8642 368.345 54.2307L369.235 53.586C369.67 53.2705 370.135 52.998 370.623 52.7724V52.7724C373.408 51.4848 376.679 51.8356 379.133 53.685L382.373 56.1265C383.15 56.7119 384.004 57.1863 384.911 57.5361V57.5361C388.984 59.1065 393.599 57.9869 396.491 54.7268L415.376 33.4392C416.585 32.0758 418.011 30.9211 419.597 30.0216V30.0216C425.463 26.6933 432.766 27.2459 438.079 31.4201L441.89 34.4151L445.991 37.3889C446.753 37.9416 447.581 38.3973 448.455 38.7457V38.7457C453.719 40.843 459.715 38.7365 462.5 33.8119L467.12 25.6433L479.234 3.54781"
-                        stroke="url(#paint0_linear_6335_17486)"
-                        stroke-width="7"
-                        stroke-linecap="round"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_6335_17486"
-                          x1="223.505"
-                          y1="-26.7017"
-                          x2="175.525"
-                          y2="173.331"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stop-color="#05CD99" />
-                          <stop offset="1" stop-color="#1B59F8" stop-opacity="0" />
-                        </linearGradient>
-                      </defs>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="424" height="122" viewBox="0 0 424 122" fill="none">
+                        <path d="M0.427983 118.792L20.436 112.705C24.5802 111.445 28.3524 109.192 31.426 106.142L40.1668 97.4693C47.8383 89.8574 60.6085 91.3656 66.3267 100.559V100.559C68.5796 104.181 72.1207 106.816 76.2356 107.933L80.7358 109.155C84.3291 110.13 88.1567 108.913 90.521 106.044L94.2298 101.542C99.2401 95.4608 108.777 96.2108 112.8 103.002V103.002C117.49 110.921 129.14 110.308 132.942 101.943L136.044 95.1183L146.061 69.7866L151.069 57.1207L153.574 50.7878V50.7878C154.669 48.018 158.379 47.5263 160.167 49.9138L170.951 64.3089C171.867 65.5318 172.978 66.5953 174.24 67.4566L177.674 69.8001C180.052 71.4226 182.198 73.3601 184.055 75.5595L188.534 80.8632C190.275 82.9246 192.662 84.3362 195.305 84.8674L196.035 85.0139C198.981 85.606 202.037 84.8823 204.4 83.0326V83.0326C206.083 81.7156 207.313 79.9064 207.92 77.8563L217.017 47.0993L222.031 30.1449L225.46 20.0467V20.0467C227.102 13.6833 235.487 12.2476 239.174 17.6988L255.167 41.3498C257.353 44.582 260.457 47.0861 264.078 48.5381V48.5381C267.645 49.9687 271.553 50.3139 275.312 49.5302L287.27 47.0369C289.641 46.5425 291.973 45.8759 294.247 45.0424L298.303 43.5554C309.407 39.485 321.745 40.4784 332.073 46.2744V46.2744L346.633 55.107C353.396 59.2095 361.952 58.8642 368.345 54.2307L369.235 53.586C369.67 53.2705 370.135 52.998 370.623 52.7724V52.7724C373.408 51.4848 376.679 51.8356 379.133 53.685L382.373 56.1265C383.15 56.7119 384.004 57.1863 384.911 57.5361V57.5361C388.984 59.1065 393.599 57.9869 396.491 54.7268L415.376 33.4392C416.585 32.0758 418.011 30.9211 419.597 30.0216V30.0216C425.463 26.6933 432.766 27.2459 438.079 31.4201L441.89 34.4151L445.991 37.3889C446.753 37.9416 447.581 38.3973 448.455 38.7457V38.7457C453.719 40.843 459.715 38.7365 462.5 33.8119L467.12 25.6433L479.234 3.54781" stroke="url(#paint0_linear_6335_17486)" stroke-width="7" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_6335_17486" x1="223.505" y1="-26.7017" x2="175.525" y2="173.331" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#05CD99"/>
+                                <stop offset="1" stop-color="#1B59F8" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
                     </svg>
                 </div>
                 <div class="profits">
@@ -80,238 +51,151 @@
                         <span class="h1-text">Profits</span>
                         <span class="p-text">+ $982</span>
                     </div>
-                  <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="424"
-                  height="122"
-                  viewBox="0 0 424 122"
-                  fill="none"
-                >
-                  <path
-                    d="M0.427983 118.792L20.436 112.705C24.5802 111.445 28.3524 109.192 31.426 106.142L40.1668 97.4693C47.8383 89.8574 60.6085 91.3656 66.3267 100.559V100.559C68.5796 104.181 72.1207 106.816 76.2356 107.933L80.7358 109.155C84.3291 110.13 88.1567 108.913 90.521 106.044L94.2298 101.542C99.2401 95.4608 108.777 96.2108 112.8 103.002V103.002C117.49 110.921 129.14 110.308 132.942 101.943L136.044 95.1183L146.061 69.7866L151.069 57.1207L153.574 50.7878V50.7878C154.669 48.018 158.379 47.5263 160.167 49.9138L170.951 64.3089C171.867 65.5318 172.978 66.5953 174.24 67.4566L177.674 69.8001C180.052 71.4226 182.198 73.3601 184.055 75.5595L188.534 80.8632C190.275 82.9246 192.662 84.3362 195.305 84.8674L196.035 85.0139C198.981 85.606 202.037 84.8823 204.4 83.0326V83.0326C206.083 81.7156 207.313 79.9064 207.92 77.8563L217.017 47.0993L222.031 30.1449L225.46 20.0467V20.0467C227.102 13.6833 235.487 12.2476 239.174 17.6988L255.167 41.3498C257.353 44.582 260.457 47.0861 264.078 48.5381V48.5381C267.645 49.9687 271.553 50.3139 275.312 49.5302L287.27 47.0369C289.641 46.5425 291.973 45.8759 294.247 45.0424L298.303 43.5554C309.407 39.485 321.745 40.4784 332.073 46.2744V46.2744L346.633 55.107C353.396 59.2095 361.952 58.8642 368.345 54.2307L369.235 53.586C369.67 53.2705 370.135 52.998 370.623 52.7724V52.7724C373.408 51.4848 376.679 51.8356 379.133 53.685L382.373 56.1265C383.15 56.7119 384.004 57.1863 384.911 57.5361V57.5361C388.984 59.1065 393.599 57.9869 396.491 54.7268L415.376 33.4392C416.585 32.0758 418.011 30.9211 419.597 30.0216V30.0216C425.463 26.6933 432.766 27.2459 438.079 31.4201L441.89 34.4151L445.991 37.3889C446.753 37.9416 447.581 38.3973 448.455 38.7457V38.7457C453.719 40.843 459.715 38.7365 462.5 33.8119L467.12 25.6433L479.234 3.54781"
-                    stroke="url(#paint0_linear_6335_17486)"
-                    stroke-width="7"
-                    stroke-linecap="round"
-                  />
-                  <defs>
-                    <linearGradient
-                      id="paint0_linear_6335_17486"
-                      x1="223.505"
-                      y1="-26.7017"
-                      x2="175.525"
-                      y2="173.331"
-                      gradientUnits="userSpaceOnUse"
-                    >
-                      <stop stop-color="#05CD99" />
-                      <stop offset="1" stop-color="#1B59F8" stop-opacity="0" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="424" height="122" viewBox="0 0 424 122" fill="none">
+                        <path d="M0.427983 118.792L20.436 112.705C24.5802 111.445 28.3524 109.192 31.426 106.142L40.1668 97.4693C47.8383 89.8574 60.6085 91.3656 66.3267 100.559V100.559C68.5796 104.181 72.1207 106.816 76.2356 107.933L80.7358 109.155C84.3291 110.13 88.1567 108.913 90.521 106.044L94.2298 101.542C99.2401 95.4608 108.777 96.2108 112.8 103.002V103.002C117.49 110.921 129.14 110.308 132.942 101.943L136.044 95.1183L146.061 69.7866L151.069 57.1207L153.574 50.7878V50.7878C154.669 48.018 158.379 47.5263 160.167 49.9138L170.951 64.3089C171.867 65.5318 172.978 66.5953 174.24 67.4566L177.674 69.8001C180.052 71.4226 182.198 73.3601 184.055 75.5595L188.534 80.8632C190.275 82.9246 192.662 84.3362 195.305 84.8674L196.035 85.0139C198.981 85.606 202.037 84.8823 204.4 83.0326V83.0326C206.083 81.7156 207.313 79.9064 207.92 77.8563L217.017 47.0993L222.031 30.1449L225.46 20.0467V20.0467C227.102 13.6833 235.487 12.2476 239.174 17.6988L255.167 41.3498C257.353 44.582 260.457 47.0861 264.078 48.5381V48.5381C267.645 49.9687 271.553 50.3139 275.312 49.5302L287.27 47.0369C289.641 46.5425 291.973 45.8759 294.247 45.0424L298.303 43.5554C309.407 39.485 321.745 40.4784 332.073 46.2744V46.2744L346.633 55.107C353.396 59.2095 361.952 58.8642 368.345 54.2307L369.235 53.586C369.67 53.2705 370.135 52.998 370.623 52.7724V52.7724C373.408 51.4848 376.679 51.8356 379.133 53.685L382.373 56.1265C383.15 56.7119 384.004 57.1863 384.911 57.5361V57.5361C388.984 59.1065 393.599 57.9869 396.491 54.7268L415.376 33.4392C416.585 32.0758 418.011 30.9211 419.597 30.0216V30.0216C425.463 26.6933 432.766 27.2459 438.079 31.4201L441.89 34.4151L445.991 37.3889C446.753 37.9416 447.581 38.3973 448.455 38.7457V38.7457C453.719 40.843 459.715 38.7365 462.5 33.8119L467.12 25.6433L479.234 3.54781" stroke="url(#paint0_linear_6335_17486)" stroke-width="7" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_6335_17486" x1="223.505" y1="-26.7017" x2="175.525" y2="173.331" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#05CD99"/>
+                                <stop offset="1" stop-color="#1B59F8" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
                 <div class="loses">
                     <div class="loses-wrapper">
                         <span class="h1-text">Losses</span>
                         <span class="p-text">- $642</span>
                     </div>
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="336"
-                    height="110"
-                    viewBox="0 0 336 110"
-                    fill="none"
-                  >
-                    <path
-                      d="M4.37091 3.84086L18.1278 9.2433C20.9241 10.3414 23.3731 12.1703 25.2194 14.5391L30.5173 21.3366C35.732 28.0273 46.1707 26.8979 49.8604 19.2438V19.2438C51.1793 16.5078 53.5298 14.4055 56.3951 13.3992L58.9368 12.5065C61.5745 11.5801 64.4994 12.5897 65.999 14.9442L68.393 18.7027C71.5379 23.6402 78.9085 23.1245 81.3546 17.7959V17.7959C84.1316 11.7464 92.8537 12.1372 95.0552 18.4097L97.2825 24.7558L104.128 47.1831L107.551 58.3968L109.262 64.0036V64.0036C109.914 66.1385 112.798 66.4665 113.92 64.5333L121.389 51.6635C121.879 50.8193 122.502 50.0597 123.234 49.4142L125.817 47.1372C127.43 45.7147 128.844 44.0815 130.021 42.2817L133.611 36.7928C134.56 35.3433 136.013 34.2985 137.689 33.8626V33.8626C140.088 33.2386 142.635 33.9379 144.376 35.6982L144.456 35.7795C145.391 36.7247 146.042 37.9123 146.338 39.2089L152.733 67.2475L156.157 82.2586L158.499 91.1992V91.1992C159.46 96.031 165.964 96.9579 168.253 92.5893L179.403 71.31C180.555 69.1114 182.355 67.3191 184.559 66.1765V66.1765C187.243 64.7845 190.35 64.4475 193.266 65.232L200.908 67.2875C202.508 67.7179 204.066 68.291 205.564 68.9999L207.977 70.1423C215.646 73.7727 224.693 72.9274 231.573 67.9376V67.9376L241.258 60.3456C245.834 56.7591 252.335 57.0397 256.57 61.0065L257.116 61.5187C257.366 61.7523 257.639 61.9585 257.933 62.1337V62.1337C259.796 63.2461 262.176 62.9652 263.733 61.449L266.17 59.0772C266.621 58.638 267.137 58.2714 267.701 57.9906V57.9906C270.413 56.6384 273.703 57.4884 275.414 59.9833L288.943 79.7065C289.574 80.6265 290.356 81.4333 291.256 82.093V82.093C295.231 85.0071 300.747 84.5597 304.213 81.0422L306.816 78.4004L309.729 75.6707C310.184 75.2446 310.696 74.8836 311.25 74.5982V74.5982C314.698 72.8216 318.925 74.3205 320.476 77.8699L324.097 86.1588L332.382 105.72"
-                      stroke="url(#paint0_linear_6335_17485)"
-                      stroke-width="7"
-                      stroke-linecap="round"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="paint0_linear_6335_17485"
-                        x1="157.125"
-                        y1="132.595"
-                        x2="104.107"
-                        y2="-38.2178"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop stop-color="#EB1B1B" />
-                        <stop offset="1" stop-color="#1B59F8" stop-opacity="0" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="336" height="110" viewBox="0 0 336 110" fill="none">
+                        <path d="M4.37091 3.84086L18.1278 9.2433C20.9241 10.3414 23.3731 12.1703 25.2194 14.5391L30.5173 21.3366C35.732 28.0273 46.1707 26.8979 49.8604 19.2438V19.2438C51.1793 16.5078 53.5298 14.4055 56.3951 13.3992L58.9368 12.5065C61.5745 11.5801 64.4994 12.5897 65.999 14.9442L68.393 18.7027C71.5379 23.6402 78.9085 23.1245 81.3546 17.7959V17.7959C84.1316 11.7464 92.8537 12.1372 95.0552 18.4097L97.2825 24.7558L104.128 47.1831L107.551 58.3968L109.262 64.0036V64.0036C109.914 66.1385 112.798 66.4665 113.92 64.5333L121.389 51.6635C121.879 50.8193 122.502 50.0597 123.234 49.4142L125.817 47.1372C127.43 45.7147 128.844 44.0815 130.021 42.2817L133.611 36.7928C134.56 35.3433 136.013 34.2985 137.689 33.8626V33.8626C140.088 33.2386 142.635 33.9379 144.376 35.6982L144.456 35.7795C145.391 36.7247 146.042 37.9123 146.338 39.2089L152.733 67.2475L156.157 82.2586L158.499 91.1992V91.1992C159.46 96.031 165.964 96.9579 168.253 92.5893L179.403 71.31C180.555 69.1114 182.355 67.3191 184.559 66.1765V66.1765C187.243 64.7845 190.35 64.4475 193.266 65.232L200.908 67.2875C202.508 67.7179 204.066 68.291 205.564 68.9999L207.977 70.1423C215.646 73.7727 224.693 72.9274 231.573 67.9376V67.9376L241.258 60.3456C245.834 56.7591 252.335 57.0397 256.57 61.0065L257.116 61.5187C257.366 61.7523 257.639 61.9585 257.933 62.1337V62.1337C259.796 63.2461 262.176 62.9652 263.733 61.449L266.17 59.0772C266.621 58.638 267.137 58.2714 267.701 57.9906V57.9906C270.413 56.6384 273.703 57.4884 275.414 59.9833L288.943 79.7065C289.574 80.6265 290.356 81.4333 291.256 82.093V82.093C295.231 85.0071 300.747 84.5597 304.213 81.0422L306.816 78.4004L309.729 75.6707C310.184 75.2446 310.696 74.8836 311.25 74.5982V74.5982C314.698 72.8216 318.925 74.3205 320.476 77.8699L324.097 86.1588L332.382 105.72" stroke="url(#paint0_linear_6335_17485)" stroke-width="7" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="paint0_linear_6335_17485" x1="157.125" y1="132.595" x2="104.107" y2="-38.2178" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#EB1B1B"/>
+                                <stop offset="1" stop-color="#1B59F8" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <div class="Enrolled">
-                  <span>Enrolled Courses</span>
-                  <div class="selct">
-                    <div class="courses-list">
-                        <div class="course">
-                            <img src="{% static "assets/backgroundTelegram.webp" %}" alt="course1" />
-                            <div class="course-info">
-                                <span class="h1-text">Course Title</span>
-                                <span class="p-text">Course Description</span>
-                            </div>
+            
+            <div class="Enrolled">
+              <span>Enrolled Courses</span>
+              <div class="selct">
+                  <div class="courses-list">
+                      <div class="course">
+                          <img src="{% static "assets/backgroundTelegram.webp" %}" alt="course1"/>
+                          <div class="course-info">
+                              <span class="h1-text">Course Title</span>
+                              <span class="p-text">Course Description</span>
                           </div>
-                            <button class="buy-now">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                      </div>
+                      <button class="buy-now">Buy Now</button>
+                  </div>
+              </div>
+          </div>
+          </div>
             <div class="right">
                 <div class="profile">
                     <div class="profile-header">
                         <div class="profile-image">
                             <div class="profile-image-wrapper">
-                            <img src="{{ request.user.customuser.pfp.url }}" alt="UserPic" />
+                                <img src="{{ request.user.customuser.pfp.url }}" alt="UserPic"/>
                             </div>
-                            <img src="{% static "assets/top1.svg" %}" alt="verified" class="UserLevelIcon" />
+                            <img src="{% static "assets/top1.svg" %}" alt="verified" class="UserLevelIcon"/>
                         </div>
                         <div class="profile-info">
                             <span class="h1-text">{{ request.user.customuser.first_name }} {{ request.user.customuser.last_name }}</span>
                             <div class="UserBadges">
                                 {% for badge in request.user.customuser.badges.all %}
-                                <img class="badges-g"  src="{{badge.icon.url}}" alt="">
-                              {% endfor %}
+                                    <img class="badges-g" src="{{ badge.icon.url }}" alt="">
+                                {% endfor %}
                             </div>
-                            <span class="p-text">
-                                {{ request.user.customuser.email|default:"No email" }}
-                            </span>
+                            <span class="p-text">{{ request.user.customuser.email|default:"No email" }}</span>
                         </div>
-                        
-                        <div class="wrap-stat">
-                       
-                          <div class="user-stats">
-                                <div class="user-stat">
-                                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="17" height="17"
-                                  viewBox="0,0,256,256">
-                                  <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                                      stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                                      font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                                      style="mix-blend-mode: normal">
-                                      <g transform="scale(10.66667,10.66667)">
-                                          <path
-                                              d="M19.5,3c-2.48528,0 -4.5,2.01472 -4.5,4.5c0,2.48528 2.01472,4.5 4.5,4.5c2.48528,0 4.5,-2.01472 4.5,-4.5c0,-2.48528 -2.01472,-4.5 -4.5,-4.5zM12.55273,9.10547c-2.26919,1.1343 -3.37319,3.43617 -3.9375,5.58789c-0.29602,-0.56515 -0.56741,-1.15172 -1.0293,-1.59961c-0.65606,-0.63618 -1.55816,-1.09375 -2.58594,-1.09375c-1.02778,0 -1.92988,0.45757 -2.58594,1.09375c-0.65606,0.63618 -1.11549,1.43773 -1.46289,2.27148c-0.69479,1.6675 -0.95117,3.4681 -0.95117,4.63477h2c0,-0.83333 0.24362,-2.53274 0.79883,-3.86523c0.2776,-0.66625 0.63067,-1.23969 1.00586,-1.60352c0.37519,-0.36382 0.72309,-0.53125 1.19531,-0.53125c0.47222,0 0.82012,0.16743 1.19531,0.53125c0.37519,0.36382 0.72826,0.93727 1.00586,1.60352c0.55521,1.3325 0.79883,3.0319 0.79883,3.86523h2c0,-0.96583 0.05672,-2.9156 0.54492,-4.78516c0.4882,-1.86955 1.38203,-3.56036 2.90234,-4.32031z">
-                                          </path>
-                                      </g>
-                                  </g>
-                              </svg>
-                              <span class="p-text-enroll">Courses</span>
-                              <span class="h1-text-enroll">0</span>
-                            </div>
-
-                           </div>
-
-                        <div class="user-stat">
-                                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="17" height="17"
-                                  viewBox="0,0,256,256">
-                                  <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                                      stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                                      font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                                      style="mix-blend-mode: normal">
-                                      <g transform="scale(5.12,5.12)">
-                                          <path
-                                              d="M9,4c-2.74545,0 -5,2.25455 -5,5v32c0,2.74546 2.25455,5 5,5h32c2.74546,0 5,-2.25455 5,-5v-32c0,-2.74545 -2.25455,-5 -5,-5zM9,6h32c1.65454,0 3,1.34545 3,3v32c0,1.65454 -1.34546,3 -3,3h-32c-1.65455,0 -3,-1.34546 -3,-3v-32c0,-1.65455 1.34545,-3 3,-3zM25,9.80859l-0.93359,2.43359l-3.06836,7.99414l-11.12891,0.60547l8.60156,7.02734l-2.78125,10.76953l9.31055,-6.04687l9.31055,6.04688l-2.78125,-10.76953l8.60156,-7.02734l-11.12891,-0.60547zM25,15.39258l2.59766,6.77148l7.26953,0.39453l-5.5957,4.57227l1.81836,7.0293l-6.08984,-3.95312l-6.08984,3.95313l1.81836,-7.0293l-5.5957,-4.57227l7.26953,-0.39453z">
-                                          </path>
-                                      </g>
-                                  </g>
-                              </svg>
-                              <span class="p-text-enroll">Points</span>
-
-                     
-
-                      <span class="h1-text-enroll">{{ request.user.customuser.points }}</span>
-                            </div>
-
-                        <div class="user-stat">
-                              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="17" height="17"
-                              viewBox="0,0,256,256">
-                              <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                                  stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                                  font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                                  style="mix-blend-mode: normal">
-                                  <g transform="scale(5.12,5.12)">
-                                      <path
-                                          d="M25,0c-2.75,0 -5,2.25 -5,5c0,1.39063 0.57422,2.65234 1.5,3.5625l-7.6875,11.8125c-0.56641,-0.22266 -1.16797,-0.375 -1.8125,-0.375c-2.75,0 -5,2.25 -5,5c0,1.82031 1.00391,3.40625 2.46875,4.28125l-3.75,10.78125c-0.23828,-0.03516 -0.47266,-0.0625 -0.71875,-0.0625c-2.75,0 -5,2.25 -5,5c0,2.75 2.25,5 5,5c2.75,0 5,-2.25 5,-5c0,-1.79297 -0.97656,-3.36719 -2.40625,-4.25l3.78125,-10.8125c0.20703,0.02734 0.41016,0.0625 0.625,0.0625c0.21484,0 0.41797,-0.03516 0.625,-0.0625l3.8125,10.78125c-1.44922,0.87891 -2.4375,2.47266 -2.4375,4.28125c0,2.75 2.25,5 5,5c2.75,0 5,-2.25 5,-5c0,-2.75 -2.25,-5 -5,-5c-0.22656,0 -0.4375,0.03125 -0.65625,0.0625l-3.8125,-10.78125c1.46484,-0.875 2.46875,-2.46094 2.46875,-4.28125c0,-1.39062 -0.57422,-2.65234 -1.5,-3.5625l7.6875,-11.8125c0.56641,0.22266 1.16797,0.375 1.8125,0.375c0.64453,0 1.24609,-0.15234 1.8125,-0.375l7.6875,11.8125c-0.92578,0.91016 -1.5,2.17188 -1.5,3.5625c0,1.82031 1.00391,3.40625 2.46875,4.28125l-3.8125,10.78125c-0.21875,-0.03125 -0.42969,-0.0625 -0.65625,-0.0625c-2.75,0 -5,2.25 -5,5c0,2.75 2.25,5 5,5c2.75,0 5,-2.25 5,-5c0,-1.80859 -0.98828,-3.40234 -2.4375,-4.28125l3.8125,-10.78125c0.20703,0.02734 0.41016,0.0625 0.625,0.0625c0.21484,0 0.41797,-0.03516 0.625,-0.0625l3.78125,10.8125c-1.42969,0.88281 -2.40625,2.45703 -2.40625,4.25c0,2.75 2.25,5 5,5c2.75,0 5,-2.25 5,-5c0,-2.75 -2.25,-5 -5,-5c-0.24609,0 -0.48047,0.02734 -0.71875,0.0625l-3.75,-10.78125c1.46484,-0.875 2.46875,-2.46094 2.46875,-4.28125c0,-2.75 -2.25,-5 -5,-5c-0.64453,0 -1.24609,0.15234 -1.8125,0.375l-7.6875,-11.8125c0.92578,-0.91016 1.5,-2.17187 1.5,-3.5625c0,-2.75 -2.25,-5 -5,-5zM25,2c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM12,22c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM38,22c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM5,42c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM19,42c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM31,42c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3zM45,42c1.66797,0 3,1.33203 3,3c0,1.66797 -1.33203,3 -3,3c-1.66797,0 -3,-1.33203 -3,-3c0,-1.66797 1.33203,-3 3,-3z">
-                                      </path>
-                                  </g>
-                              </g>
-                          </svg>
-                          <span class="p-text-enroll">Active since</span>
-                          <span class="h1-text-enroll">07/21</span>
-                            </div>
-
-                          </div>
-
-                            </div>
-                        </div>
-                        <div class="user-bio">
-                            <!-- <span class="h1-text">Bio :</span> -->
-                            <span class="p-text">
-                                {{ request.user.customuser.bio|default:"No bio" }}
-                            </span>
-                        </div>
-                      </div>
-                        
+                    </div>
+                    <button onclick="captureUserProfile()">📸 Capture Profile</button>
+                </div>
+                <div class="user-bio">
+                    <span class="p-text">{{ request.user.customuser.bio|default:"No bio" }}</span>
+                </div>
             </div>
         </div>
     </div>
-    
-
-
 </div>
+
 <!-- URL Popup Modal -->
 <div id="linkPopup" class="modal">
-  <div class="modal-content">
-      <span class="close" onclick="closeLinkPopup()">&times;</span>
-      <div class="modal-wrap">
-          <h2>Share Link</h2>
-          <p>Copy this link to share:</p>
-          <input type="text" id="urlLink" readonly onclick="copyLink()">
-          <button onclick="copyLink()">Copy Link</button>
-      </div>
-  </div>
+    <div class="modal-content">
+        <span class="close" onclick="closeLinkPopup()">&times;</span>
+        <div class="modal-wrap">
+            <h2>Share Link</h2>
+            <p>Copy this link to share:</p>
+            <input type="text" id="urlLink" readonly onclick="copyLink()">
+            <button onclick="copyLink()">Copy Link</button>
+        </div>
+    </div>
 </div>
 {% endblock main %}
 
 {% block scripts %}
 <script>
-  function goBack() {
-    window.history.back();
-}
-
-function showLinkPopup() {
-    const modal = document.getElementById("linkPopup");
-    const url = window.location.href;
-    document.getElementById("urlLink").value = url;
-    modal.style.display = "block";
-}
-
-function closeLinkPopup() {
-    const modal = document.getElementById("linkPopup");
-    modal.style.display = "none";
-}
-
-function copyLink() {
-    const urlLink = document.getElementById("urlLink");
-    urlLink.select();
-    document.execCommand("copy");
-    urlLink.value = "Link copied!";
-    setTimeout(() => {
-        const url = window.location.href;
-        urlLink.value = url;
-    }, 2000);
-}
-
-function toggleLike(element) {
-    const likeIcon = element.querySelector('.like-button');
-    if (likeIcon.getAttribute('data-liked') === 'true') {
-        likeIcon.setAttribute('data-liked', 'false');
-        likeIcon.style.color = '';
-    } else {
-        likeIcon.setAttribute('data-liked', 'true');
-        likeIcon.style.color = 'red';
+    function goBack() {
+        window.history.back();
     }
-}
 
+    function showLinkPopup() {
+        const modal = document.getElementById("linkPopup");
+        const url = window.location.href;
+        document.getElementById("urlLink").value = url;
+        modal.style.display = "block";
+    }
+
+    function closeLinkPopup() {
+        const modal = document.getElementById("linkPopup");
+        modal.style.display = "none";
+    }
+
+    function copyLink() {
+        const urlLink = document.getElementById("urlLink");
+        urlLink.select();
+        document.execCommand("copy");
+        urlLink.value = "Link copied!";
+        setTimeout(() => {
+            const url = window.location.href;
+            urlLink.value = url;
+        }, 2000);
+    }
+
+    function toggleLike(element) {
+        const likeIcon = element.querySelector('.like-button');
+        if (likeIcon) {
+            if (likeIcon.getAttribute('data-liked') === 'true') {
+                likeIcon.setAttribute('data-liked', 'false');
+                likeIcon.style.color = '';
+            } else {
+                likeIcon.setAttribute('data-liked', 'true');
+                likeIcon.style.color = 'red';
+            }
+        }
+    }
+
+    function captureUserProfile() {
+      const userProfileContainer = document.getElementById('userProfileContainer');
+      if (userProfileContainer) {
+          // Temporarily set a white background for the capture
+          userProfileContainer.style.background = 'white';
+  
+          html2canvas(userProfileContainer).then(canvas => {
+              const imgData = canvas.toDataURL('image/png');
+              const link = document.createElement('a');
+              link.href = imgData;
+              link.download = 'user-profile.png';
+              link.click();
+  
+              // Restore the original background after capture
+              userProfileContainer.style.background = 'red';
+          });
+      }
+  }
+  
 </script>
 {% endblock scripts %}

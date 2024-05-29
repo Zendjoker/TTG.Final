@@ -8,14 +8,15 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.IntegerField(default=0)
+    discount_price = models.IntegerField(default=0, blank=True, null=True)  # New field for discount price
     img = models.ImageField(upload_to="Course_img", blank=True, null=True)
     professor = models.ForeignKey("Users.Professor", on_delete=models.CASCADE, related_name='courses', null=True, blank=True)
     members_count = models.IntegerField(default=0)
+    course_requirements = models.TextField(blank=True, null=True)  # New field for course requirements
+    course_features = models.TextField(blank=True, null=True)  # New field for course features
 
     def course_image(self):
         return mark_safe('<img src="%s" width="50" height="50" style="object-fit:cover; border-radius: 6px;" />' % (self.img.url))
-
-
 
     def calculate_progress_percentage(self, user):
         total_levels = self.admin_levels.count()

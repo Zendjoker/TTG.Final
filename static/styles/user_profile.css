@@ -3,7 +3,7 @@
     justify-content: center;
 }
 .user-profile-container{
-    /* width: 1093px; */
+    width: 70%;
     flex-shrink: 0;
     border-radius: 15.536px;
     border: 0.5px solid #ffffff44;
@@ -81,15 +81,15 @@
 }
 .profile-image{
     position: relative;
-    width: 130px;
-    height: 130px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     border: 1px solid #ffffff;
 }
 .profile-image-wrapper{
     position: relative;
-    width: 130px;
-    height: 130px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #ffffff;
@@ -105,8 +105,8 @@
     bottom: 0;
 }
 .profile-image img {
-    width: 130px;
-    height: 130px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #ffffff;
@@ -114,7 +114,7 @@
 .profile-image .UserLevelIcon{
     position: absolute;
     bottom: -33px;
-    right: 40px;
+    right: 60px;
     width: 45px;
     height: auto;
     border: none;
@@ -150,7 +150,7 @@
 .profile-info > .h1-text{
     color: #fff;
     font-family: "Poppins", sans-serif;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 600;
     line-height: 23.549px;
     /* 171.429% */
@@ -159,7 +159,7 @@
 .profile-info > .p-text{
     color: lightgray;
     font-family: "Poppins", sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 18.2px;
     /* 130% */
@@ -189,6 +189,7 @@
 
 }
 .balance > .h1-text{
+    font-size: 28px;
     font-weight: 700;
     color: #05cd99;
     padding: 0 10px;
@@ -303,7 +304,7 @@
     letter-spacing: -0.275px;
 }
 .balance > svg{
-    width: 114%;
+    width: 112%;
 }
 .profits{
     width: 100%;
@@ -327,7 +328,7 @@
 .profits-wrapper > .h1-text{
     color: #fff;
     font-family: "Poppins", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 23.549px;
     letter-spacing: -0.275px;
@@ -336,6 +337,7 @@
     font-weight: 600;
     color: #05cd99;
     text-wrap: nowrap;
+    font-size: 20px;
 }
 .loses{
     width: 100%;
@@ -359,7 +361,7 @@
 .loses-wrapper > .h1-text{
     color: #fff;
     font-family: "Poppins", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 23.549px;
     letter-spacing: -0.275px;
@@ -368,6 +370,7 @@
     font-weight: 600;
     color: #EB1B1B;
     text-wrap: nowrap;
+    font-size: 20px;
 }
 .Enrolled{
     width: 100%;

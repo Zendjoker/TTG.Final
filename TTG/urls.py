@@ -123,7 +123,7 @@ urlpatterns = [
     path('getCryptoDetails/', views.getCryptoDetails, name='get_crypto_details'),
 
 
-    path('buy-course/', views.buyCourseView, name='buy-course'),
+     path('buy-course/<str:course_title>/', views.course_detail_view, name='course_detail'),
 
     path('start-quest/', views.start_quest, name='start-quest'),
     path('complete-step/', views.complete_step, name='complete-step'),
