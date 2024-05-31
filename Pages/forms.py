@@ -31,3 +31,4 @@ class LogInForm(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'id': 'loginPassword'}),
     )
+

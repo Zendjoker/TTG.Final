@@ -4,7 +4,7 @@
 {% block head %}
     <link rel="stylesheet" href="{% static "styles/personalInfo.css" %}">
     {% block title %}
-        <title>Tunisian Top Gs | personal info</title>
+        <title>Tunisian Top Gs | Personal Info</title>
     {% endblock title %}
 {% endblock head %}
 
@@ -18,12 +18,12 @@
         <div class="flex flex-wrap personal-information-body">
             <a href="#" onclick="goBack()"><i data-lucide="undo-2"></i> Go Back</a>
             <div class="flex-col info-cards">
-                <span class="h1-text">Personal information</span>
+                <span class="h1-text">Personal Information</span>
 
                 <div class="flex card-item">
                     <div class="flex flex-col info-section">
                         <span class="p-text">Username</span>
-                        <span class="p-text secondary-text">{{ request.user.customuser.user.username }}</span>
+                        <span class="p-text secondary-text">{{ request.user.username }}</span>
                         <input type="text" name="username" class="edit-field" style="display:none;">
                     </div>
                     <button class="change-btn" onclick="editField(this, 'username')">Change</button>
@@ -56,8 +56,24 @@
                     <button class="change-btn" onclick="editField(this, 'bio')">Change</button>
                 </div>
 
-            </div>
+                <div class="flex card-item">
+                    <div class="flex flex-col info-section">
+                        <span class="p-text">First Name</span>
+                        <span class="p-text secondary-text">{{ request.user.first_name }}</span>
+                        <input type="text" name="first_name" class="edit-field" style="display:none;">
+                    </div>
+                    <button class="change-btn" onclick="editField(this, 'first_name')">Change</button>
+                </div>
 
+                <div class="flex card-item">
+                    <div class="flex flex-col info-section">
+                        <span class="p-text">Last Name</span>
+                        <span class="p-text secondary-text">{{ request.user.last_name }}</span>
+                        <input type="text" name="last_name" class="edit-field" style="display:none;">
+                    </div>
+                    <button class="change-btn" onclick="editField(this, 'last_name')">Change</button>
+                </div>
+            </div>
         </div>
         <div class="flex flex-col flex-center personal-info">
             <div class="flex-container-info">
@@ -66,7 +82,7 @@
                 </div>
 
                 <div class="profile-name">
-                    <span class="h1-text">{{ request.user.customuser.first_name }} {{ request.user.customuser.last_name }}</span>
+                    <span class="h1-text">{{ request.user.first_name }} {{ request.user.last_name }}</span>
                 </div>
 
                 <div class="email-information">
@@ -150,7 +166,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <span class="p-text-enroll">Active since</span>
+                            <span class="p-text-enroll">Active Since</span>
                         </div>
 
                         <span class="h1-text-enroll">07/21</span>
@@ -165,67 +181,86 @@
         </div>
     </section>
     <!--  Pop Up's -->
-<div id="popupMessage" class="popup-message" style="display: none;">
-  <div class="flex-pops">
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 48 48">
-      <linearGradient id="4UU4ptC_mBgYTIFHxQVZaa_hP6pCUyT8QGk_gr1" x1="-308.751" x2="36.906" y1="-346.874" y2="49.567" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffda1c"></stop><stop offset="1" stop-color="#feb705"></stop></linearGradient><path fill="url(#4UU4ptC_mBgYTIFHxQVZaa_hP6pCUyT8QGk_gr1)" d="M44.634,37.846L25.76,7.787c0,0-0.508-1.05-1.76-1.05s-1.76,1.05-1.76,1.05L3.366,37.846	C3.366,37.846,3,38.337,3,39c0,1.105,0.895,2,2,2h38c1.105,0,2-0.895,2-2C45,38.337,44.634,37.846,44.634,37.846z"></path><radialGradient id="4UU4ptC_mBgYTIFHxQVZab_hP6pCUyT8QGk_gr2" cx="18.189" cy="16.781" r="22.363" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4b4b4b"></stop><stop offset=".531" stop-color="#393939"></stop><stop offset="1" stop-color="#252525"></stop></radialGradient><path fill="url(#4UU4ptC_mBgYTIFHxQVZab_hP6pCUyT8QGk_gr2)" d="M24.014,37c-0.732,0-1.336-0.222-1.812-0.666c-0.476-0.444-0.714-0.981-0.714-1.613 c0-0.659,0.24-1.199,0.721-1.62c0.48-0.421,1.082-0.631,1.805-0.631c0.732,0,1.332,0.213,1.798,0.638 c0.467,0.426,0.7,0.963,0.7,1.613c0,0.659-0.231,1.203-0.693,1.633S24.755,37,24.014,37z M26.236,17.721l-0.481,12.175 c-0.015,0.372-0.321,0.666-0.693,0.666h-2.179c-0.373,0-0.679-0.295-0.693-0.668L21.735,17.72c-0.015-0.393,0.3-0.72,0.693-0.72 h3.116C25.937,17,26.252,17.327,26.236,17.721z"></path>
-      </svg>
-      <span id="popupSpan" class="span-popup"></span>
-      <button id="popUpCloseButton" class="pop-up-close-button" onclick="closePopup()">Close</button>
-  </div>
-</div>
+    <div id="popupMessage" class="popup-message" style="display: none;">
+        <div class="flex-pops">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 48 48">
+                <linearGradient id="4UU4ptC_mBgYTIFHxQVZaa_hP6pCUyT8QGk_gr1" x1="-308.751" x2="36.906" y1="-346.874"
+                    y2="49.567" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#ffda1c"></stop>
+                    <stop offset="1" stop-color="#feb705"></stop>
+                </linearGradient>
+                <path fill="url(#4UU4ptC_mBgYTIFHxQVZaa_hP6pCUyT8QGk_gr1)"
+                    d="M44.634,37.846L25.76,7.787c0,0-0.508-1.05-1.76-1.05s-1.76,1.05-1.76,1.05L3.366,37.846	C3.366,37.846,3,38.337,3,39c0,1.105,0.895,2,2,2h38c1.105,0,2-0.895,2-2C45,38.337,44.634,37.846,44.634,37.846z">
+                </path>
+                <radialGradient id="4UU4ptC_mBgYTIFHxQVZab_hP6pCUyT8QGk_gr2" cx="18.189" cy="16.781" r="22.363"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#4b4b4b"></stop>
+                    <stop offset=".531" stop-color="#393939"></stop>
+                    <stop offset="1" stop-color="#252525"></stop>
+                </radialGradient>
+                <path fill="url(#4UU4ptC_mBgYTIFHxQVZab_hP6pCUyT8QGk_gr2)"
+                    d="M24.014,37c-0.732,0-1.336-0.222-1.812-0.666c-0.476-0.444-0.714-0.981-0.714-1.613 c0-0.659,0.24-1.199,0.721-1.62c0.48-0.421,1.082-0.631,1.805-0.631c0.732,0,1.332,0.213,1.798,0.638 c0.467,0.426,0.7,0.963,0.7,1.613c0,0.659-0.231,1.203-0.693,1.633S24.755,37,24.014,37z M26.236,17.721l-0.481,12.175 c-0.015,0.372-0.321,0.666-0.693,0.666h-2.179c-0.373,0-0.679-0.295-0.693-0.668L21.735,17.72c-0.015-0.393,0.3-0.72,0.693-0.72 h3.116C25.937,17,26.252,17.327,26.236,17.721z">
+                </path>
+            </svg>
+            <span id="popupSpan" class="span-popup"></span>
+            <button id="popUpCloseButton" class="pop-up-close-button" onclick="closePopup()">Close</button>
+        </div>
+    </div>
 </main>
 
 <script>
-  function editField(button, field) {
-      var parentDiv = $(button).closest('.card-item');
-      var infoSection = parentDiv.find('.info-section');
-      var textSpan = infoSection.find('.secondary-text');
-      var inputField = infoSection.find('.edit-field');
-      if ($(button).text() === 'Change') {
-          textSpan.hide();
-          inputField.val(textSpan.text().trim()).show();
-          $(button).text('Confirm');
-      } else {
-          textSpan.text(inputField.val()).show();
-          inputField.hide();
-          $(button).text('Change');
-          updateField(field, inputField.val());
-      }
-  }
+    function editField(button, field) {
+        var parentDiv = $(button).closest('.card-item');
+        var infoSection = parentDiv.find('.info-section');
+        var textSpan = infoSection.find('.secondary-text');
+        var inputField = infoSection.find('.edit-field');
+        if ($(button).text() === 'Change') {
+            textSpan.hide();
+            inputField.val(textSpan.text().trim()).show();
+            $(button).text('Confirm');
+        } else {
+            textSpan.text(inputField.val()).show();
+            inputField.hide();
+            $(button).text('Change');
+            updateField(field, inputField.val());
+        }
+    }
 
-  {% comment %} function updateField(field, value) {
-      $.ajax({
-          type: 'POST',
-          url: '{% url "update_user_info" %}',
-          data: {
-              'csrfmiddlewaretoken': '{{ csrf_token }}',
-              [field]: value
-          },
-          success: function (response) {
-              if (response.status !== 'success') {
-                  showPopup('Error: ' + JSON.stringify(response.errors));
-              }
-          },
-          error: function (response) {
-              showPopup('An error occurred, Please Try Again ');
-          }
-      });
-  } {% endcomment %}
+    function updateField(field, value) {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "update_user_info" %}',
+            data: JSON.stringify({
+                'csrfmiddlewaretoken': '{{ csrf_token }}',
+                [field]: value
+            }),
+            contentType: 'application/json',
+            success: function (response) {
+                if (response.status !== 'success') {
+                    showPopup(response.message);
+                } else {
+                    showPopup('Updated successfully.');
+                }
+            },
+            error: function (response) {
+                showPopup('Error, please try again.');
+            }
+        });
+    }
 
-  function showPopup(message) {
-      $('#popupSpan').text(message);
-      $('#popupMessage').show();
-  }
+    function showPopup(message) {
+        $('#popupSpan').text(message);
+        $('#popupMessage').show();
+    }
 
-  function closePopup() {
-      $('#popupMessage').hide();
-  }
+    function closePopup() {
+        $('#popupMessage').hide();
+    }
 
-  function goBack() {
-      window.history.back();
-      return false; // Prevent default link behavior
-  }
+    function goBack() {
+        window.history.back();
+        return false; // Prevent default link behavior
+    }
 </script>
 
 {% endblock main %}

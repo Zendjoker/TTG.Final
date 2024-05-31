@@ -1,15 +1,7 @@
+
 import json
 from django.shortcuts import get_object_or_404, redirect, render
-
-
 import logging
-
-# Disable logging for requests module
-logging.getLogger("urllib3").setLevel(logging.CRITICAL)
-logging.getLogger('http.server').setLevel(logging.CRITICAL)
-logging.basicConfig(level=logging.WARNING)
-
-
 import pandas as pd
 import datetime as dt
 import time as t
@@ -18,40 +10,48 @@ from plotly.offline import plot
 from pycoingecko import CoinGeckoAPI
 import json
 import sys
+import logging
 
 
+# Disable logging for requests module
+logging.getLogger("urllib3").setLevel(logging.CRITICAL)
+logging.getLogger('http.server').setLevel(logging.CRITICAL)
+logging.basicConfig(level=logging.WARNING)
 
-from django.core.exceptions import ObjectDoesNotExist
+
 from Pages.models import OptIn
-
-from django.utils import timezone
-from django.contrib.auth.models import User
 from Chat.views import get_online_users
 from datetime import time, timedelta
 from Carts.models import Cart, CartItem
 from Chat.models import Room, Message, Section
 from Orders.models import Order, OrderItem
-from Pages.models import Home
+from Pages.models import Home  , OnboardingQuestion
 from PrivateSessions.forms import PrivateSessionForm
 from Products.models import Cupon, Product, Deal
-from django.urls import reverse
 import requests
 from Users.forms import TransactionForm
 from Users.models import Badge, Transaction
 from .forms import LogInForm, SignUpForm
-from django.contrib.auth import authenticate, login, logout
 from Courses.models import Course, CourseProgression, Level, LevelProgression, Module, UserCourseProgress, Video
+
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-from .models import Dashboard, Quest, UserQuestProgress
 from django.core.serializers import serialize
-from Users.models import CustomUser
-from django.shortcuts import render
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from Pages.models import Feedback, Podcast , FeaturedYoutubeVideo
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout , update_session_auth_hash
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm , PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+
+from .models import Dashboard, Quest, UserQuestProgress
+from Users.models import CustomUser
+from Pages.models import Feedback, Podcast , FeaturedYoutubeVideo
 
 
 def homeView(request, *args, **kwargs):
@@ -89,7 +89,7 @@ def homeView(request, *args, **kwargs):
     return render(request, 'home.html', context)
 
 
-# Buy Course Page Views  http://127.0.0.1:8000/buy-course/TileofCourse
+
 def course_detail_view(request, course_title):
     course = get_object_or_404(Course, title=course_title)
     course_requirements = course.course_requirements.split('\n') if course.course_requirements else []
@@ -99,6 +99,8 @@ def course_detail_view(request, course_title):
         'course': course,
         'course_requirements': course_requirements,
         'course_features': course_features,
+        'total_price': course.get_total_price(),
+        'next_payment': course.get_next_payment(),
     }
     return render(request, 'course_detail.html', context)
 
@@ -108,22 +110,101 @@ def shopView(request, *args, **kwargs):
     deals = Deal.objects.all()
     return render(request, 'shop.html', {"products": products, "deals": deals})
 
-def coursesView(request, *args, **kwargs):
+@login_required
+@csrf_exempt
+def unlock_course_view(request, course_id):
+    if request.method == 'POST':
+        course = get_object_or_404(Course, id=course_id)
+        user = request.user.customuser
+        user.enrolled_courses.add(course)
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
+
+
+@login_required
+def coursesView(request):
+    user = request.user.customuser
     courses = Course.objects.all()
+    
+    for course in courses:
+        course.has_access = user.enrolled_courses.filter(id=course.id).exists()
+    
+    context = {
+        'courses': courses,
+    }
+    return render(request, 'courses.html', context)
 
 
-    return render(request, 'courses.html', {"courses": courses})
+@login_required
+def levelsView(request, course_id):
+    user = request.user.customuser
+    course = get_object_or_404(Course, id=course_id)
+    
+    if not user.enrolled_courses.filter(id=course_id).exists():
+        return redirect('course_detail', course_title=course.title)
+    
+    levels = Level.objects.filter(course=course)
+    return render(request, 'levels.html', {"levels": levels, "course": course})
+
+@csrf_exempt
+@login_required
+def settingsResetPasswordView(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        form = PasswordChangeForm(user=request.user, data=data)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important for keeping the user logged in
+            return JsonResponse({'success': True})
+        else:
+            errors = form.errors.as_json()
+            return JsonResponse({'success': False, 'errors': errors})
+    return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)
+
+@login_required
+def settingsResetPasswordPage(request):
+    return render(request, 'settingsResetPassword.html')
+
+@csrf_exempt
+@login_required
+def update_user_info(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user = request.user
+        customuser = user.customuser
+
+        if 'username' in data:
+            user.username = data['username']
+        if 'email' in data:
+            customuser.email = data['email']
+        if 'tel' in data:
+            customuser.tel = data['tel']
+        if 'bio' in data:
+            customuser.bio = data['bio']
+        if 'first_name' in data:
+            user.first_name = data['first_name']
+        if 'last_name' in data:
+            user.last_name = data['last_name']
+
+        try:
+            user.save()
+            customuser.save()
+            return JsonResponse({'status': 'success'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
+
+
+def onboarding_view(request):
+    questions = OnboardingQuestion.objects.prefetch_related('options').all()
+    return render(request, 'onboarding.html', {'questions': questions})
 
 
 def userProfileView(request, *args, **kwargs):  
     user = CustomUser.objects.get(user=User.objects.get(username=kwargs.get('username')))
     return render(request, 'user_profile.html', {"user": user})
 
-def levelsView(request, *args, **kwargs):
-    course_id = kwargs.get('course_id')
-    course = Course.objects.get(id=course_id)
-    levels = Level.objects.filter(course=course)  # Filter levels by the course
-    return render(request, 'levels.html', {"levels": levels})
 
 def videoCourseView(request, level_id):
     level = Level.objects.get(id=level_id)
@@ -212,6 +293,9 @@ def logoutf(request):
 
 def pageNotFoundView(request, *args, **kwargs):
     return render(request, '404.html', {})
+
+def onboardingView(request, *args, **kwargs):
+    return render(request, 'onboarding.html', {})
 
 def forgetPasswordView(request, *args, **kwargs):
 
@@ -504,9 +588,7 @@ def settingsView(request, *args, **kwargs):
 
     return render(request, 'settings.html', {})
 
-def settingsResetPasswordView(request, *args, **kwargs):
 
-    return render(request, 'settingsResetPassword.html', {})
 
 def paymentView(request, *args, **kwargs):
 

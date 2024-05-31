@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.contrib.admin import ModelAdmin
-from django.utils.html import mark_safe
 from .models import Course, Level, Module, Video, Quiz, UserCourseProgress
 
 class QuizInline(admin.StackedInline):
@@ -22,16 +20,16 @@ class LevelInline(admin.StackedInline):
     inlines = [ModuleInline]
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'course_image', 'professor', 'price', 'get_discount_price', 'members_count']
+    list_display = ['title', 'course_image', 'professor', 'price', 'get_discount_price', 'members_count', 'category']
     search_fields = ['title', 'description', 'professor__name']
-    list_filter = ['price', 'professor']
+    list_filter = ['price', 'professor', 'category']
     readonly_fields = ['course_image']
     fieldsets = (
         ('Course Information', {
-            'fields': ('title', 'description', 'price', 'discount_price', 'img', 'course_image', 'professor', 'members_count')
+            'fields': ('title', 'description', 'price', 'discount_price', 'img', 'course_image', 'professor', 'members_count', 'category')
         }),
         ('Additional Information', {
-            'fields': ('course_requirements', 'course_features')
+            'fields': ('course_requirements', 'course_features', 'video_trailer')
         }),
     )
     inlines = [LevelInline, ModuleInline, VideoInline, QuizInline]

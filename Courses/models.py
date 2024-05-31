@@ -4,19 +4,33 @@ from django.db.models import Sum
 from django.utils.html import mark_safe
 from django_ckeditor_5.fields import CKEditor5Field
 
+# Create your models here.
 class Course(models.Model):
+    CATEGORY_CHOICES = [
+        ('Trading', 'Trading'),
+        ('Development', 'Development'),
+        ('Design', 'Design UI / UX'),
+        ('Data Science', 'Data Science'),
+        ('Marketing', 'Marketing'),
+    ]
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.IntegerField(default=0)
-    discount_price = models.IntegerField(default=0, blank=True, null=True)  # New field for discount price
+    discount_price = models.IntegerField(default=0, blank=True, null=True)
     img = models.ImageField(upload_to="Course_img", blank=True, null=True)
     professor = models.ForeignKey("Users.Professor", on_delete=models.CASCADE, related_name='courses', null=True, blank=True)
     members_count = models.IntegerField(default=0)
-    course_requirements = models.TextField(blank=True, null=True)  # New field for course requirements
-    course_features = models.TextField(blank=True, null=True)  # New field for course features
+    course_requirements = models.TextField(blank=True, null=True)
+    course_features = models.TextField(blank=True, null=True)
+    video_trailer = models.FileField(upload_to="course_trailers", blank=True, null=True)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)  # Add this line
 
     def course_image(self):
-        return mark_safe('<img src="%s" width="50" height="50" style="object-fit:cover; border-radius: 6px;" />' % (self.img.url))
+        if self.img and hasattr(self.img, 'url'):
+            return mark_safe('<img src="%s" width="50" height="50" style="object-fit:cover; border-radius: 6px;" />' % (self.img.url))
+        else:
+            return "No Image"
 
     def calculate_progress_percentage(self, user):
         total_levels = self.admin_levels.count()
@@ -34,8 +48,16 @@ class Course(models.Model):
             user_progress.completed = True
             user_progress.save()
 
+    def get_total_price(self):
+        return self.price - self.discount_price
+
+    def get_next_payment(self):
+        return self.discount_price
+
     def __str__(self):
         return self.title
+
+
 
 class Level(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='admin_levels', blank=True, null=True)

@@ -2,6 +2,13 @@
   width: 100px;
   height: 100px;
 } */
+.wrap-courses-all {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+	gap: 15px;
+}
 .volls {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -29,7 +36,17 @@
 	height: 120px;
 	flex-shrink: 0;
 }
+.course-owner > .h1-text{
+	color: #fff;
+	font-family: "Poppins", sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 28px;
+	letter-spacing: -0.36px;
+	text-transform: capitalize;
 
+}
 .fkkk {
 	border-radius: 8px;
 	background: rgba(255, 255, 255, 0.03);
@@ -554,7 +571,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-
+	width: -webkit-fill-available;
 	gap: 0.5rem;
 	/* height: 100vh; */
 	justify-content: center;
@@ -590,6 +607,9 @@
 	border-radius: 37.498px;
 	opacity: 0.6;
 	background: linear-gradient(137deg, #404680b3 97%, rgb(0 0 0 / 73%) -12.96%, #000000 97%);
+	
+	
+	backdrop-filter: blur(6.240553379058838px);
 	object-fit:cover ;
 }
 
@@ -694,10 +714,10 @@
 	width: 100%;
 }
 
-.course-owner>.h1-text {
+.h1-text {
 	color: #fff;
 	font-family: "Poppins", sans-serif;
-	font-size: 20px;
+	font-size: 38px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;
@@ -798,6 +818,46 @@
 	transform: rotateY(180deg);
 }
 
+/* Add this to your courses.css file */
+
+.filter-bar {
+	display: flex;
+    width: max-content;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 32.486px;
+    background: rgba(255, 255, 255, 0.10);
+    justify-content: center;
+    padding: 5px;
+    gap: 5px;
+}
+
+.filter-btn {
+	display: flex;
+	width: 140.516px;
+	/* padding: 10.336px 48.014px 9.799px 48.502px; */
+	justify-content: center;
+	align-items: center;
+	border-radius: 28.99px;
+	cursor: pointer;
+	color: #FFF;
+	font-size: 11.813px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 18.376px; /* 155.556% */
+	border: none;
+	background: none;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+	transition: 1s ease-in-out;
+	background: linear-gradient(100deg, #260FB8 -36.4%, #9747FF 131.27%);	
+}
+
+.course {
+    display: block; /* Ensure all courses are initially displayed */
+}
 
 
 .refresh-button {
@@ -824,7 +884,7 @@
     justify-content: center;
     flex-direction: column;
     color: #ffffff;
-	background: linear-gradient(100deg, #260fb8 -36.4%, #9747ff 131.27%);
+	/* background: linear-gradient(100deg, #260fb8 -36.4%, #9747ff 131.27%); */
 
     padding: 20px;
     border-radius: 10px;
@@ -842,7 +902,7 @@
 .popular-courses {
 	justify-content: center;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     height: 60vh;
 }
 

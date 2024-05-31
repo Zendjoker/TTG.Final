@@ -20,7 +20,7 @@
 	justify-content: center;
 	gap: 20px;
 	align-items: flex-start;
-	padding-top: 2rem;
+	padding-top: 25px;
 }
 
 .course-container {
@@ -35,9 +35,9 @@
 
 .professor-img {
 	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border: 2px solid #a25bf3;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #d2d2d2;
 }
 
 .professor-img img {
@@ -86,21 +86,43 @@
 .course-details {
 	display: flex;
 	flex-direction: column;
-	padding: 1rem;
-	gap: 1rem;
+	gap: 25px;
+	/* padding: 1rem; */
 }
 
 .course-description {
 	display: flex;
-	flex-direction: column;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .course-container video {
-	width: 80%;
-	border-radius: 15px;
-	margin: 2rem auto;
-	display: block;
-	border: 2px solid #a25bf3;
+	width: 90%;
+    border-radius: 15px;
+    display: block;
+    border: 1px solid #ffffff;
+    align-self: center;
+    /* margin: 2rem auto; */
+}
+.limited-text {
+	max-height: 4em; /* Adjust the height to 5 lines */
+	overflow: hidden;
+	position: relative;
+}
+
+.see-more {
+    display: none;
+    cursor: pointer;
+    color: white;
+    text-decoration: underline;
+    position: relative;
+    /* background: white; */
+    font-size: 18px;
+    padding-left: 30px;
+}
+.see-more:hover{
+	color: #5cff9c;
+	transition: 0.6s ease-in-out;
 }
 
 .h1-text {
@@ -137,13 +159,18 @@
 }
 
 .items-container {
-	border-radius: 10px;
-	border: 0.5px solid #fff;
-	background: rgba(73, 73, 73, 0.12);
-	box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.25);
-	backdrop-filter: blur(6px);
-	height: fit-content;
-	padding: 2rem;
+    border-radius: 10px;
+    border: 0.5px solid #fff;
+    background: rgba(73, 73, 73, 0.12);
+    box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    height: fit-content;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 25px;
 }
 
 .items-list {
@@ -170,9 +197,9 @@
 	height: 209px;
 	border-radius: 8px;
 	background: rgba(173, 171, 171, 0.05);
-	margin: auto 1rem;
-	margin-top: 16px;
-	margin-bottom: 10px;
+	/* margin: auto 1rem; */
+	/* margin-top: 16px; */
+	/* margin-bottom: 10px; */
 }
 
 .item-description {
@@ -201,7 +228,7 @@
 	font-weight: 700;
 	line-height: 24px;
 	/* 96% */
-	margin-bottom: 15px;
+	/* margin-bottom: 15px; */
 }
 
 .item-size,
@@ -333,7 +360,7 @@
 
 
 .course-container>.h1-text {
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 }
 
 .place-order {
@@ -395,7 +422,7 @@
 	backdrop-filter: blur(6px);
 	height: fit-content;
 	padding: 2rem;
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -437,6 +464,10 @@
 }
 .requirements-list{
 	padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
 .title-flex svg{
 	color: #ffffff82;
@@ -451,8 +482,19 @@
 .requirements-list > li > svg{
 	color: #40ff6b;
 }
-.features-list{
-	padding-left: 1rem;
+.course-requirements , .course-features{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 10px;
+
+}
+.features-list {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
 .features-list > li{
 	display: flex;
@@ -522,9 +564,38 @@
 	transform: rotate(360deg);
 	transition: transform 0.7s ease;
 	color: #5cff9c;
-
-	
 }
+
+.course-details > .special-btn {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(309deg, #b319ff5e -18.01%, #ff004f 142.51%);
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 20px;
+    text-decoration: none;
+    gap: 12px;
+    width: 40%;
+    align-self: baseline;
+}
+.course-details > .special-btn:hover{
+	box-shadow: inset 0px 0px 20px 0px #d0d5d2;
+	transition: box-shadow 0.7s ease;
+}
+.course-details > .special-btn:hover span{
+	-webkit-animation: text-flicker-out-glow 2.5s linear both;
+	animation: text-flicker-out-glow 2.5s linear both;
+}
+.course-details > .special-btn:hover svg{
+	transform: rotate(360deg);
+	transition: transform 0.7s ease;
+	color: #5cff9c;
+}
+
 @media screen and (max-width: 1024px) {
 	.course-container {
 		width: 60%;
@@ -644,7 +715,110 @@ input[type=radio] {
 	transition: .3s;
 	margin: 0;
 }
+/* Modal container */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(0 0 0 / 40%);
+    backdrop-filter: blur(12px);
+}
 
+/* Modal content box */
+.modal-content {
+    background: linear-gradient(309deg, #b319ff5e -18.01%, #000000 142.51%);
+    box-shadow: 0px 20px 100px 0px rgba(0, 0, 0, 0.25);
+    margin: 15% auto;
+    padding: 8px 40px;
+    border: 1px solid #888;
+    width: 83%;
+    max-width: 500px;
+    height: 20%;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.modal-content > p {
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 24px;
+
+}
+.course-img{
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	border: 1px solid #ffffff;
+}
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+	align-self: flex-end;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Confirm button */
+#confirmUnlock {
+	background: linear-gradient(309deg, #b319ff5e -18.01%, #ff004f 142.51%);
+
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+#confirmUnlock:hover {
+    background-color: #45a049;
+}
+/* Loading animation */
+.wrap-redirected {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.wrap-redirected > p {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 24px;
+	color: #fff;
+
+}
+.wrap-redirected svg {
+    margin-bottom: 15px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 /* ----------------------------------------------
  * Generated by Animista on 2024-5-8 2:28:39
  * Licensed under FreeBSD License.

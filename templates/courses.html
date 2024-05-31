@@ -7,46 +7,54 @@
 
 {% block main %}
     {% include "components/navbar.html" %}
-    <div class="course-container">
+    <div class='wrap-courses-all'>
         <span class="h1-text">Popular Courses</span>
-        <div class="nav"></div>
-        <div class="popular-courses">
-            <div class="course-list">
-                {% if courses %}
-                    {% for course in courses %}
-                        <a href="{% url 'levels' course_id=course.id %}" class="course volls" style="background: url('{{course.img.url}}') no-repeat center; background-size: 155% 100%;">
-                            <div class="layer"></div>
-                            <div class="course-layout">
-                                <div class="course-header">
-                                    <img class="owner-icon" src="{{course.img.url}}" alt="course-bg" />
-                                    <div class="course-owner">
-                                        <span class="h1-text">{{course.professor.user.user.username}}</span>
-                                        <span class="p-text">{{course.professor.description}}</span>
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Trading">Trading</button>
+            <button class="filter-btn" data-filter="Development">Development</button>
+            <button class="filter-btn" data-filter="Design">Design UI / UX</button>
+            <button class="filter-btn" data-filter="Data Science">Data Science</button>
+            <button class="filter-btn" data-filter="Marketing">Marketing</button>
+        </div>
+        <div class="course-container">
+           
+            <div class="nav"></div>
+            <div class="popular-courses">
+                <div class="course-list">
+                    {% if courses %}
+                        {% for course in courses %}
+                            <a href="#" class="course volls" data-category="{{ course.category }}" data-has-access="{{ course.has_access|yesno:'True,False' }}" data-course-id="{{ course.id }}" data-course-title="{{ course.title }}" style="background: url('{{course.img.url}}') no-repeat center; background-size: 155% 100%;">
+                                <div class="layer"></div>
+                                <div class="course-layout">
+                                    <div class="course-header">
+                                        <img class="owner-icon" src="{{course.img.url}}" alt="course-bg" />
+                                        <div class="course-owner">
+                                            <span class="h1-text">{{course.professor.user.user.username}}</span>
+                                            <span class="p-text">{{course.professor.description}}</span>
+                                        </div>
+                                        <div class="course-pricing">
+                                            <span class="price">{{course.price}} DT - Monthly</span>
+                                        </div>
                                     </div>
-                                    <div class="course-pricing">
-                                        <span class="price">{{course.price}} DT - Monthly</span>
-                                        {% comment %} <span class="duration">82 min</span> {% endcomment %}
+                                    <div class="course-title">
+                                        <span class="h1-text">{{course.title}}</span>
                                     </div>
                                 </div>
-                                <div class="course-title">
-                                    <span class="h1-text">{{course.title}}</span>
-                                </div>
-                            </div>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <div id="no-courses-message" class="no-courses-message">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0,0,256,256">
-                            <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M43.98438,1.98633c-0.55152,0.00862 -0.99193,0.46214 -0.98437,1.01367v7.69922c-4.21481,-5.29713 -10.7122,-8.69922 -18,-8.69922c-12.69047,0 -23,10.30953 -23,23c0.00054,0.00847 0.00119,0.01694 0.00195,0.02539c-0.00027,0.02475 0.00038,0.04951 0.00195,0.07422l0.02539,1.05664v0.02539l0.00195,0.02539l0.08594,1.11719l0.00195,0.02539l0.00195,0.02539l0.14063,1.10156l0.00195,0.02539l0.00586,0.02344l0.11133,0.62695l0.53516,0.71875l0.89648,0.00195l0.53711,-0.71875v-0.35156l-0.10352,-0.57812l-0.00195,-0.01758l-0.13281,-1.0332v-0.01172l-0.08203,-1.05469l-0.0293,-1.10742c0,-0.00458 0,-0.00909 0,-0.01367v-0.01172c0.01375,-11.59777 9.39897,-20.97461 21,-20.97461c6.69269,0 12.63519,3.13071 16.48047,8h-7.48047c-0.36064,-0.0051 -0.69608,0.18438 -0.87789,0.49587c-0.18181,0.3115 -0.18181,0.69676 0,1.00825c0.18181,0.3115 0.51725,0.50097 0.87789,0.49587h9.44922h1.55078v-11c0.0037,-0.2703 -0.10218,-0.53059 -0.29351,-0.72155c-0.19133,-0.19097 -0.45182,-0.29634 -0.72212,-0.29212zM46.75391,24.03125l-0.67773,0.58594l-0.07617,0.34375l-0.06445,1.69336l-0.02734,0.22656l0.30664,0.8418l0.85742,0.25977l0.7207,-0.53125l0.10156,-0.33789l0.03125,-0.25977l0.00391,-0.03906l0.00195,-0.03906l0.06836,-1.73633l-0.37109,-0.81641zM45.95508,30.88477l-0.82422,0.35352l-0.17578,0.30469l-0.49023,1.35156l-0.19922,0.44336l0.03711,0.89453l0.73828,0.50586l0.84961,-0.28906l0.19727,-0.29102l0.2207,-0.48633l0.01563,-0.03516l0.01172,-0.03516l0.5,-1.37891l-0.10547,-0.88867zM5.02734,32.77539l-0.86914,0.21875l-0.34375,0.82813l0.08594,0.3418l0.35547,0.78711l0.00977,0.02148l0.00977,0.02148l0.48633,0.94922l0.01172,0.02148l0.01172,0.02148l0.5293,0.91992l0.01172,0.02148l0.01367,0.02148l0.54297,0.84766l0.76953,0.45898l0.82813,-0.34375l0.2207,-0.86719l-0.13477,-0.32617l-0.51758,-0.80859l-0.00781,-0.01367l-0.49805,-0.86523l-0.00195,-0.00195l-0.46289,-0.90234l-0.00391,-0.00977l-0.35156,-0.77734zM43.39844,36.63477l-0.89063,0.10156l-0.25586,0.24023l-0.77148,1.03906l-0.00391,0.00586l-0.75977,0.90625l-0.01367,0.01367l-0.25977,0.27734l-0.25781,0.85742l0.5332,0.7207l0.89648,0.00391l0.2832,-0.21094l0.27344,-0.28906l0.01953,-0.02148l0.01953,-0.02344l0.83398,-0.99609l0.01953,-0.02148l0.01758,-0.02344l0.77539,-1.04492l0.15625,-0.88281zM9.79297,40.07031l-0.72266,0.5293l-0.00977,0.89648l0.20898,0.2832l0.24219,0.23242l0.01758,0.01563l0.01758,0.01563l0.79883,0.69141l0.01758,0.01563l0.01953,0.01563l0.83008,0.65234l0.01953,0.01563l0.01953,0.01367l0.86133,0.61328l0.01953,0.01367l0.02149,0.01367l0.41406,0.26758l0.89063,0.09375l0.60938,-0.65625l-0.16016,-0.88281l-0.25976,-0.23828l-0.4082,-0.26367l-0.00586,-0.00391l-0.78516,-0.55859l-0.81836,-0.64258l-0.01172,-0.00977l-0.75586,-0.65625l-0.00586,-0.00586l-0.20703,-0.19922zM37.17578,42.19531l-0.32422,0.13672l-0.89844,0.58789l-1.05664,0.60742l-0.01172,0.00586l-0.51562,0.25586l-0.53906,0.71484l0.25,0.86133l0.83789,0.31445l0.33984,-0.09961l0.52539,-0.25977l0.02734,-0.01367l0.02539,-0.01562l1.13672,-0.64844l0.02539,-0.01562l0.02344,-0.01562l0.92578,-0.60547l0.44922,-0.77344l-0.34961,-0.82422zM17.90234,44.77539l-0.88672,0.12305l-0.43359,0.78516l0.36914,0.81641l0.30859,0.16992l0.87109,0.29297l0.02344,0.00977l0.02344,0.00586l1.04297,0.29688l0.02539,0.00586l0.02344,0.00586l1.06445,0.24609l0.02344,0.00586l0.02539,0.00391l0.89063,0.16016l0.85937,-0.25391l0.31055,-0.83984l-0.48828,-0.75195l-0.33008,-0.12305l-0.89062,-0.16016l-0.9668,-0.22266l-0.01562,-0.00391l-1.02148,-0.29102l-0.00586,-0.00195zM30.26367,45.40234l-0.35156,0.01367l-0.99023,0.21875l-1.31836,0.20508l-0.52539,0.04883l-0.76172,0.47461l-0.07422,0.89258l0.66992,0.59375l0.35156,0.0293l0.58789,-0.05469l0.03125,-0.00195l0.03125,-0.00586l1.3418,-0.21094l0.03125,-0.00391l0.0293,-0.00586l1.02539,-0.22656l0.69531,-0.56445l-0.03516,-0.89648z"></path></g></g>
-                            </svg>
-                        No courses available at the moment. Please refresh the page and contact the support team if the issue persists.
-                    </div>
-                {% endif %}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div id="no-courses-message" class="no-courses-message">
+                            <!-- SVG code here -->
+                            No courses available at the moment. Please refresh the page and contact the support team if the issue persists.
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
+    </div>
         <div class="deco-asset"></div>
         <div class="deco-asset2"></div>
-    </div>
 {% endblock main %}
 
 {% block footer %}{% endblock footer %}
@@ -54,12 +62,38 @@
 {% block scripts %}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const coursesAvailable = {{ courses|length }} > 0;
-            if (coursesAvailable) {
-                console.log("Courses are available.");
-            } else {
-                console.log("No courses available. Please refresh the page and contact the support team.");
-            }
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courses = document.querySelectorAll('.course');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    courses.forEach(course => {
+                        if (filter === 'all' || course.getAttribute('data-category') === filter) {
+                            course.style.display = '';
+                        } else {
+                            course.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            courses.forEach(course => {
+                course.addEventListener('click', function(event) {
+                    const hasAccess = this.getAttribute('data-has-access') === 'True';
+                    const courseId = this.getAttribute('data-course-id');
+                    const courseTitle = this.getAttribute('data-course-title');
+                    if (hasAccess) {
+                        window.location.href = `/courses/${courseId}/levels/`;
+                    } else {
+                        event.preventDefault();
+                        window.location.href = `/buy-course/${courseTitle}/`;
+                    }
+                });
+            });
         });
     </script>
 {% endblock scripts %}

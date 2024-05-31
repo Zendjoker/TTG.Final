@@ -317,6 +317,7 @@
 }
 
 .user-f {
+	border: 1px solid #f5f5f54a;
 	width: 118px;
 	height: 113px;
 	flex-shrink: 0;

@@ -128,6 +128,7 @@ main {
 	font-size: 16px !important;
 	white-space: nowrap;
 	overflow: hidden;
+	text-transform: capitalize;
 	text-overflow: ellipsis;
 }
 
@@ -200,6 +201,7 @@ main {
 .profile-name>.h1-text {
 	font-size: 24px;
 	font-weight: 700;
+	text-transform: capitalize;
 }
 .flex-container-info{
 	display: flex;

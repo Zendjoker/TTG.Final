@@ -122,3 +122,19 @@ class UserQuestProgress(models.Model):
 
 class OptIn(models.Model):
     email = models.EmailField(max_length=254)
+
+
+class OnboardingQuestion(models.Model):
+    question = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='onboarding_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.question
+
+class OnboardingOption(models.Model):
+    question = models.ForeignKey(OnboardingQuestion, related_name='options', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='onboarding_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name

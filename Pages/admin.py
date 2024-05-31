@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Dashboard, Home, Feedback, Podcast, Quest, Step, UserQuestProgress, FeaturedYoutubeVideo, OptIn
+from .models import Dashboard, Home, Feedback, Podcast, Quest, Step, UserQuestProgress, FeaturedYoutubeVideo, OptIn , OnboardingOption , OnboardingQuestion
 
 # Register your models here.
 admin.site.register(Dashboard)
@@ -11,3 +11,11 @@ admin.site.register(Quest)
 admin.site.register(Step)
 admin.site.register(UserQuestProgress)
 admin.site.register(OptIn)
+
+class OnboardingOptionInline(admin.TabularInline):
+    model = OnboardingOption
+    extra = 1
+
+@admin.register(OnboardingQuestion)
+class OnboardingQuestionAdmin(admin.ModelAdmin):
+    inlines = [OnboardingOptionInline]
