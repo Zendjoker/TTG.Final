@@ -183,8 +183,10 @@ def update_user_info(request):
             customuser.bio = data['bio']
         if 'first_name' in data:
             user.first_name = data['first_name']
+            customuser.first_name = data['first_name']
         if 'last_name' in data:
             user.last_name = data['last_name']
+            customuser.last_name = data['last_name']
 
         try:
             user.save()
@@ -595,8 +597,8 @@ def paymentView(request, *args, **kwargs):
     return render(request, 'payment.html', {})
 
 def personalInfoView(request, *args, **kwargs):
-
-    return render(request, 'personalInfo.html', {})
+    
+    return render(request, 'personalInfo.html', {'date' : request.user.date_joined })
 
 def checkoutView(request, *args, **kwargs):
     # Get or create the user's cart

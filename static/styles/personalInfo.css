@@ -67,11 +67,11 @@ main {
 	gap: 15px;
 }
 .wrap-icon-c{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
 }
 .personal-information-body>a {
 	color: white;

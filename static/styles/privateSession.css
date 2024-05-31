@@ -788,7 +788,7 @@ span.id_cours {
 
 	.schedule-body {
 		flex-direction: column;
-		gap: 10px;
+		gap: 40px;
 		border: none;
 		background: none;
 	}
@@ -798,7 +798,7 @@ span.id_cours {
 	}
 
 	.schedule-body-right {
-		
+		border: none;
 		padding: 0;
 	}
 	.done-body .schedule-body-right{
@@ -875,7 +875,7 @@ span.id_cours {
 	}
 
 	.tab-content>span {
-		font-size: 20px;
+		font-size: 19px;
 		padding-top: 10px;
 	}
 
@@ -938,7 +938,8 @@ span.id_cours {
 		padding: 0;
 	}
 }
-@media screen and (max-width: 425px) {
+
+@media screen and (max-width: 486px) {
 	.session-pictures {
 		display: flex;
 		
@@ -946,14 +947,15 @@ span.id_cours {
 	.schedule-container{
 		border: none;
 		border-radius: 0px;
-		background: none;
+		/* background: none; */
 	}
 	.schedule-body{
 		border: none;
-		border-radius: none;
-		background : none;
-		box-shadow: none;
-		backdrop-filter: none;
+        border-radius: none;
+        background: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        gap: 30px;
 		
 	}
 	.schedule-container {
